@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>InvestTrack вАФ –љ–∞–Ї–Њ–њ–ї–µ–љ–Є—П –Є –Є–љ–≤–µ—Б—В–Є—Ж–Є–Є</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2f4f0;--card:#fff;--ink:#15221e;--mut:#667570;--line:#dfe5df;--ac:#0f766e;--acs:#d6ede9;--neg:#b4443a;--pos:#0f766e;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#101a17;--card:#17241f;--ink:#e8efeb;--mut:#8fa29b;--line:#26362f;--ac:#3fb8a8;--acs:#1c3a35;--neg:#e0776c;--pos:#3fb8a8}}
+:root[data-theme=dark]{--bg:#101a17;--card:#17241f;--ink:#e8efeb;--mut:#8fa29b;--line:#26362f;--ac:#3fb8a8;--acs:#1c3a35;--neg:#e0776c;--pos:#3fb8a8}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.5 Manrope,system-ui,sans-serif}
+.app{max-width:760px;margin:0 auto;padding:16px 16px 90px}
+h1,h2,h3{margin:0}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.top b{font-size:18px;font-weight:800}.top span{color:var(--mut);font-size:13px}
+nav{display:flex;gap:6px;overflow-x:auto;padding-bottom:8px;margin-bottom:12px}
+nav button{white-space:nowrap;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:20px;padding:7px 14px;font:600 13px inherit;cursor:pointer}
+nav button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:12px}
+.hero{padding:22px 18px}
+.big{font-size:clamp(34px,9vw,52px);font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.1}
+.mid{font-size:30px;font-weight:800;font-variant-numeric:tabular-nums;margin-top:6px}
+.mut{color:var(--mut);font-size:13px}
+.pos{color:var(--pos)}.neg{color:var(--neg)}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border:0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.bar{height:10px;background:var(--acs);border-radius:6px;overflow:hidden;margin:8px 0}
+.bar i{display:block;height:100%;background:var(--ac)}
+.btn{border:0;background:var(--ac);color:#fff;border-radius:10px;padding:10px 16px;font:700 14px inherit;cursor:pointer}
+.btn.g{background:var(--acs);color:var(--ac)}.btn.d{background:transparent;color:var(--neg);border:1px solid var(--neg)}
+.btn.sm{padding:5px 10px;font-size:12px}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.chips button{border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:14px;padding:4px 11px;font:600 12px inherit;cursor:pointer}
+.chips button.on{background:var(--acs);color:var(--ac);border-color:var(--ac)}
+.who{margin:0 0 12px}
+.who button{padding:6px 13px;font-size:13px}
+.fab{position:fixed;right:max(16px,calc(50% - 364px));bottom:calc(18px + env(safe-area-inset-bottom,0px));display:flex;gap:8px;z-index:5}
+.fab .btn{box-shadow:0 6px 18px #0004;padding:13px 20px;font-size:15px}
+#modal{position:fixed;inset:0;background:#0007;display:none;align-items:flex-end;justify-content:center;z-index:10}
+#modal.on{display:flex}
+#modal form{background:var(--card);width:100%;max-width:480px;border-radius:18px 18px 0 0;padding:18px;max-height:92%;overflow:auto}
+label{display:block;font-size:12px;color:var(--mut);margin:10px 0 3px;font-weight:600}
+input,select,textarea{width:100%;padding:10px;border:1px solid var(--line);border-radius:9px;background:var(--bg);color:var(--ink);font:inherit}
+.acts{display:flex;gap:8px;margin-top:16px}
+.note{background:var(--acs);color:var(--ink);border-radius:10px;padding:9px 12px;margin-bottom:8px;font-size:13px}
+.bars{display:flex;align-items:flex-end;gap:6px;height:110px;overflow-x:auto}
+.bars div{flex:1;min-width:34px;text-align:center;font-size:10px;color:var(--mut);display:flex;flex-direction:column;justify-content:flex-end;height:100%}
+.bars i{display:block;background:var(--ac);border-radius:4px 4px 0 0;min-height:2px}
+.bars i.o{background:var(--neg);opacity:.8}
+svg{width:100%;height:auto;display:block}
+.tag{font-size:11px;background:var(--acs);color:var(--ac);padding:2px 8px;border-radius:10px;font-weight:700}
+.empty{text-align:center;color:var(--mut);padding:24px 0}
+textarea{min-height:110px;font:12px monospace}
+</style></head>
+<body>
+<div class="app" id="app"></div>
+<div class="fab" id="fab"></div>
+<div id="modal"></div>
+<script>
+const R={KZT:1,USD:480,EUR:520,RUB:5.5,JPY:3.2},SYM={KZT:'вВЄ',USD:'$',EUR:'вВђ',RUB:'вВљ',JPY:'¬•'};
+const ROLE={owner:'рЯСС –Т–ї–∞–і–µ–ї–µ—Ж',member:'рЯС§ –£—З–∞—Б—В–љ–Є–Ї',viewer:'рЯСА –Э–∞–±–ї—О–і–∞—В–µ–ї—М'};
+const today=()=>new Date().toISOString().slice(0,10);
+const uid=()=>Math.random().toString(36).slice(2,9);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const ym=d=>d.slice(0,7);
+const nm=m=>{let[y,x]=m.split('-').map(Number);x++;if(x>12){x=1;y++}return y+'-'+String(x).padStart(2,'0')};
+const pm=m=>{let[y,x]=m.split('-').map(Number);x--;if(x<1){x=12;y--}return y+'-'+String(x).padStart(2,'0')};
+function seed(){const p=[{id:'p1',name:'–Ф–∞–љ–Є—П–ї',role:'owner'},{id:'p2',name:'–Р–ї–Є',role:'member'},{id:'p3',name:'–Ґ–Є–Љ—Г—А',role:'member'}];
+const o=(t,type,sub,amount,date,comment,p,init)=>({id:uid(),t,type,sub,amount,cur:'KZT',date,comment,p,init});
+return{name:'–Ь–Њ–є –њ–Њ—А—В—Д–µ–ї—М',user:'–Ф–∞–љ–Є—П–ї',cur:'KZT',start:'2025-09-01',goal:2000000,theme:'auto',notif:true,pin:'',me:'p1',
+invVals:{p1:130000,p2:195000,p3:325000},rate:10,accr:true,lastAcc:null,people:p,
+ops:[o('bank','in','Kaspi',100000,'2025-09-01','–Э–∞—З–∞–ї—М–љ–∞—П —Б—Г–Љ–Љ–∞','p1',1),o('bank','in','Kaspi',400000,'2025-10-15','–Я–Њ–њ–Њ–ї–љ–µ–љ–Є–µ','p1'),o('bank','in','Halyk',350000,'2025-12-10','–Я–Њ–њ–Њ–ї–љ–µ–љ–Є–µ','p2'),o('bank','out','Kaspi',50000,'2026-02-03','–Я–Њ–Ї—Г–њ–Ї–∞','p1'),
+o('inv','in','Apple',100000,'2026-01-10','–Р–Ї—Ж–Є–Є','p1'),o('inv','in','S&P 500 ETF',250000,'2026-03-02','ETF','p3'),o('inv','in','–Ф—А—Г–≥–Є–µ',150000,'2026-05-20','–Ю–±–ї–Є–≥–∞—Ж–Є–Є','p2'),o('bank','in','Kaspi',50000,'2026-09-30','–Я–Њ–њ–Њ–ї–љ–µ–љ–Є–µ','p1')],
+goals:[{id:uid(),e:'рЯПОпЄП',name:'–Э–Њ–≤–∞—П –Љ–∞—И–Є–љ–∞',target:10000000,cur:3500000},{id:uid(),e:'рЯТ∞',name:'–§–Є–љ–∞–љ—Б–Њ–≤–∞—П –њ–Њ–і—Г—И–Ї–∞',target:1000000,cur:400000}]}}
+let S;try{S=JSON.parse(localStorage.getItem('it2'))}catch(e){}
+S=S||seed();
+const save=()=>{try{localStorage.setItem('it2',JSON.stringify(S))}catch(e){}};
+let tab='home',range=0,hf='all',who='all',locked=!!S.pin;
+const sgn=o=>o.type==='out'?-1:1;
+const base=o=>sgn(o)*o.amount*R[o.cur||'KZT']/R[S.cur];
+const money=(n,c=S.cur)=>Math.round(n).toLocaleString('ru-RU')+' '+SYM[c];
+const fd=d=>new Date(d+'T00:00').toLocaleDateString('ru-RU',{day:'numeric',month:'long',year:'numeric'});
+const sg=n=>(n>0?'+':n<0?'вИТ':'')+money(Math.abs(n));
+const me=()=>S.people.find(p=>p.id===S.me)||{role:'viewer'};
+const canAdd=()=>me().role!=='viewer',owner=()=>me().role==='owner';
+const canEdit=o=>owner()||(me().role==='member'&&o.p===me().id);
+const canVal=id=>owner()||(me().role==='member'&&me().id===id);
+const pname=id=>(S.people.find(p=>p.id===id)||{name:'вАФ'}).name;
+// –Ъ–Њ–≥–Њ —Б–Љ–Њ—В—А–Є–Љ: 'all' вАФ –≤—Б–µ—Е –≤–Љ–µ—Б—В–µ, –Є–љ–∞—З–µ вАФ –Њ–і–љ–Њ–≥–Њ —З–µ–ї–Њ–≤–µ–Ї–∞ –Њ—В–і–µ–ї—М–љ–Њ
+const vis=o=>who==='all'||o.p===who;
+const sumAll=f=>S.ops.filter(f).reduce((a,o)=>a+base(o),0);
+const sum=f=>sumAll(o=>vis(o)&&f(o));
+// –Ш–љ–≤–µ—Б—В–Є—Ж–Є–Є –Ї–∞–ґ–і–Њ–≥–Њ —З–µ–ї–Њ–≤–µ–Ї–∞ вАФ –Њ—В–і–µ–ї—М–љ—Л–є –њ–Њ—А—В—Д–µ–ї—М
+const pInv=id=>sumAll(o=>o.t==='inv'&&o.p===id);
+const pVal=id=>S.invVals[id]==null?pInv(id):+S.invVals[id];
+const pCap=id=>sumAll(o=>o.t==='bank'&&o.p===id)+pVal(id);
+const monthly=()=>(who==='all'?S.people.reduce((a,p)=>a+pVal(p.id),0):pVal(who))*S.rate/100;
+const stats=()=>{const bank=sum(o=>o.t==='bank'),inv=sum(o=>o.t==='inv');
+ const iv=who==='all'?inv+S.people.reduce((a,p)=>a+pVal(p.id)-pInv(p.id),0):pVal(who);
+ return{bank,inv,iv,gain:iv-inv,cap:bank+iv}};
+
+function migrate(){
+ if(!S.invVals){S.invVals={};if(S.invVal!=null){const t=S.people.reduce((a,p)=>a+pInv(p.id),0);
+  S.people.forEach(p=>{const v=pInv(p.id);if(v>0&&t)S.invVals[p.id]=S.invVal*v/t})}delete S.invVal}
+ if(S.rate==null)S.rate=10;if(S.accr==null)S.accr=true;if(S.lastAcc===undefined)S.lastAcc=null;
+ if(who!=='all'&&!S.people.some(p=>p.id===who))who='all';
+}
+// –Ъ–∞–ґ–і—Л–є –Љ–µ—Б—П—Ж 1-–≥–Њ —З–Є—Б–ї–∞: rate% –Њ—В —Б—В–Њ–Є–Љ–Њ—Б—В–Є –Є–љ–≤–µ—Б—В–Є—Ж–Є–є —З–µ–ї–Њ–≤–µ–Ї–∞ –Ј–∞—З–Є—Б–ї—П–µ—В—Б—П –љ–∞ –µ–≥–Њ –±–∞–љ–Ї
+function accrue(){
+ if(!S.accr||!(S.rate>0))return;
+ const cur=ym(today());
+ if(!S.lastAcc)S.lastAcc=pm(cur);
+ while(S.lastAcc<cur){const m=nm(S.lastAcc),d=m+'-01';
+  S.people.forEach(p=>{const all=pInv(p.id),at=sumAll(o=>o.t==='inv'&&o.p===p.id&&o.date<=d);
+   if(all>0&&at>0){const a=Math.round(pVal(p.id)*Math.min(1,at/all)*S.rate/100);
+    if(a>0)S.ops.push({id:uid(),t:'bank',type:'in',sub:'–Ф–Њ—Е–Њ–і —Б –Є–љ–≤–µ—Б—В–Є—Ж–Є–є',amount:a,cur:S.cur,date:d,comment:S.rate+'% —Б –Є–љ–≤–µ—Б—В–Є—Ж–Є–є',p:p.id,auto:1})}});
+  S.lastAcc=m}
+ save();
+}
+
+function form(title,fields,onSave,onDel){
+ const m=document.getElementById('modal');
+ m.innerHTML=`<form><h3>${title}</h3>${fields.map(f=>`<label>${f.l}</label>`+(f.o?`<select name="${f.k}">${f.o.map(x=>`<option value="${esc(x[0])}" ${x[0]==f.v?'selected':''}>${esc(x[1])}</option>`).join('')}</select>`:`<input name="${f.k}" type="${f.t||'text'}" value="${esc(f.v)}" ${f.t==='number'?'step="any"':''} ${f.opt?'':'required'}>`)).join('')}
+ <div class="acts"><button class="btn">–°–Њ—Е—А–∞–љ–Є—В—М</button><button type="button" class="btn g" data-a="close">–Ю—В–Љ–µ–љ–∞</button>${onDel?'<button type="button" class="btn d" id="del">–£–і–∞–ї–Є—В—М</button>':''}</div></form>`;
+ m.classList.add('on');
+ const f=m.querySelector('form');
+ f.onsubmit=e=>{e.preventDefault();const d=Object.fromEntries(new FormData(f));m.classList.remove('on');onSave(d);save();render()};
+ if(onDel)f.querySelector('#del').onclick=()=>{m.classList.remove('on');onDel();save();render()};
+}
+const A={
+ close(){document.getElementById('modal').classList.remove('on')},
+ tab(d){tab=d.v;render();scrollTo(0,0)},
+ who(d){who=d.v;render()},
+ range(d){range=+d.v;render()},
+ hf(d){hf=d.v;render()},
+ add(d){opForm(null,d.type||'in',d.t||'bank')},
+ edit(d){opForm(S.ops.find(o=>o.id===d.id))},
+ invval(d){const id=d.id||who;if(!id||id==='all')return;if(!canVal(id))return alert('–Ь–Њ–ґ–љ–Њ –Њ–±–љ–Њ–≤–ї—П—В—М —В–Њ–ї—М–Ї–Њ —Б—В–Њ–Є–Љ–Њ—Б—В—М —Б–≤–Њ–Є—Е –Є–љ–≤–µ—Б—В–Є—Ж–Є–є');
+  form('–Ґ–µ–Ї—Г—Й–∞—П —Б—В–Њ–Є–Љ–Њ—Б—В—М –Є–љ–≤–µ—Б—В–Є—Ж–Є–є вАФ '+esc(pname(id)),[{k:'v',l:'–°—Г–Љ–Љ–∞, '+S.cur,t:'number',v:Math.round(pVal(id))}],x=>{S.invVals[id]=+x.v})},
+ person(d){personForm(S.people.find(p=>p.id===d.id))},
+ goal(d){goalForm(S.goals.find(g=>g.id===d.id))},
+ renbank(d){form('–Э–∞–Ј–≤–∞–љ–Є–µ –±–∞–љ–Ї–∞',[{k:'n',l:'–Э–∞–Ј–≤–∞–љ–Є–µ',v:d.v}],x=>{S.ops.forEach(o=>{if(o.t==='bank'&&o.sub===d.v)o.sub=x.n})})},
+ settings(){settingsForm()},
+ reset(){if(confirm('–Т–µ—А–љ—Г—В—М –і–µ–Љ–Њ-–і–∞–љ–љ—Л–µ –Є —Б—В–µ—А–µ—В—М –≤—Б—С –Њ—Б—В–∞–ї—М–љ–Њ–µ?')){S=seed();locked=false;who='all';accrue()}render();save()},
+ backup(){const m=document.getElementById('modal');m.innerHTML=`<form><h3>–†–µ–Ј–µ—А–≤–љ–∞—П –Ї–Њ–њ–Є—П</h3><label>–°–Ї–Њ–њ–Є—А—Г–є—В–µ —В–µ–Ї—Б—В, —З—В–Њ–±—Л —Б–Њ—Е—А–∞–љ–Є—В—М. –Т—Б—В–∞–≤—М—В–µ —Б—О–і–∞ —А–∞–љ–µ–µ —Б–Њ—Е—А–∞–љ—С–љ–љ—Г—О –Ї–Њ–њ–Є—О –Є –љ–∞–ґ–Љ–Є—В–µ ¬Ђ–Т–Њ—Б—Б—В–∞–љ–Њ–≤–Є—В—М¬ї.</label><textarea id="bk">${esc(JSON.stringify(S))}</textarea><div class="acts"><button type="button" class="btn" id="rs">–Т–Њ—Б—Б—В–∞–љ–Њ–≤–Є—В—М</button><button type="button" class="btn g" data-a="close">–Ч–∞–Ї—А—Л—В—М</button></div></form>`;m.classList.add('on');
+  m.querySelector('#rs').onclick=()=>{try{const x=JSON.parse(m.querySelector('#bk').value);if(!x.ops||!x.people)throw 0;S=x;migrate();accrue();save();m.classList.remove('on');render()}catch(e){alert('–Э–µ —Г–і–∞–ї–Њ—Б—М –њ—А–Њ—З–Є—В–∞—В—М –Ї–Њ–њ–Є—О')}}},
+ delacc(){if(confirm('–£–і–∞–ї–Є—В—М –≤—Б–µ –і–∞–љ–љ—Л–µ? –≠—В–Њ –љ–µ–ї—М–Ј—П –Њ—В–Љ–µ–љ–Є—В—М.')){S={...seed(),ops:[],goals:[],invVals:{},lastAcc:null,people:[{id:'p1',name:S.user,role:'owner'}],me:'p1',pin:''};who='all';save();tab='home';render()}}
+};
+function opForm(o,type='in',t='bank'){
+ if(!canAdd())return alert('–£ –љ–∞–±–ї—О–і–∞—В–µ–ї—П –љ–µ—В –њ—А–∞–≤ –љ–∞ –Є–Ј–Љ–µ–љ–µ–љ–Є–µ');
+ if(o&&!canEdit(o))return alert('–Т—Л –Љ–Њ–ґ–µ—В–µ –Љ–µ–љ—П—В—М —В–Њ–ї—М–Ї–Њ —Б–≤–Њ–Є –Њ–њ–µ—А–∞—Ж–Є–Є');
+ const v=o||{type,t,sub:t==='bank'?'Kaspi':'–Р–Ї—Ж–Є–Є',amount:'',cur:S.cur,date:today(),comment:'',p:who!=='all'?who:me().id};
+ const mine=owner()?S.people:S.people.filter(p=>p.id===me().id);
+ form(o?'–Ш–Ј–Љ–µ–љ–Є—В—М –Њ–њ–µ—А–∞—Ж–Є—О':v.type==='in'?'–Ф–Њ–±–∞–≤–Є—В—М –і–µ–љ—М–≥–Є':'–°–љ—П—В—М –і–µ–љ—М–≥–Є',[
+  {k:'type',l:'–Ф–µ–є—Б—В–≤–Є–µ',o:[['in','–Я–Њ–њ–Њ–ї–љ–µ–љ–Є–µ'],['out','–°–љ—П—В–Є–µ']],v:v.type},
+  {k:'t',l:'–Ъ—Г–і–∞',o:[['bank','рЯП¶ –С–∞–љ–Ї'],['inv','рЯУИ –Ш–љ–≤–µ—Б—В–Є—Ж–Є–Є']],v:v.t},
+  {k:'sub',l:'–С–∞–љ–Ї / –∞–Ї—В–Є–≤',v:v.sub},
+  {k:'amount',l:'–°—Г–Љ–Љ–∞',t:'number',v:v.amount},
+  {k:'cur',l:'–Т–∞–ї—О—В–∞',o:Object.keys(R).map(c=>[c,c+' '+SYM[c]]),v:v.cur},
+  {k:'date',l:'–Ф–∞—В–∞',t:'date',v:v.date},
+  {k:'comment',l:'–Ъ–Њ–Љ–Љ–µ–љ—В–∞—А–Є–є / –њ—А–Є—З–Є–љ–∞',v:v.comment,opt:1},
+  {k:'p',l:'–І—М–Є –і–µ–љ—М–≥–Є',o:mine.map(p=>[p.id,p.name]),v:v.p}],
+  d=>{d.amount=Math.abs(+d.amount);if(o)Object.assign(o,d);else S.ops.push({id:uid(),...d})},
+  o?()=>{S.ops=S.ops.filter(x=>x!==o)}:null);
+}
+function personForm(p){
+ if(!owner())return alert('–Ґ–Њ–ї—М–Ї–Њ –≤–ї–∞–і–µ–ї–µ—Ж —Г–њ—А–∞–≤–ї—П–µ—В —Г—З–∞—Б—В–љ–Є–Ї–∞–Љ–Є');
+ const n=!p;
+ form(n?'–Э–Њ–≤—Л–є —Г—З–∞—Б—В–љ–Є–Ї':'–£—З–∞—Б—В–љ–Є–Ї',[{k:'name',l:'–Ш–Љ—П',v:p?p.name:''},{k:'role',l:'–†–Њ–ї—М',o:Object.entries(ROLE),v:p?p.role:'member'}].concat(n?[{k:'amt',l:'–Э–∞—З–∞–ї—М–љ–∞—П —Б—Г–Љ–Љ–∞',t:'number',v:0},{k:'date',l:'–Ф–∞—В–∞ –љ–∞—З–∞–ї–∞',t:'date',v:today()}]:[]),
+ d=>{if(n){const id=uid();S.people.push({id,name:d.name,role:d.role});if(+d.amt>0)S.ops.push({id:uid(),t:'bank',type:'in',sub:'Kaspi',amount:+d.amt,cur:S.cur,date:d.date,comment:'–Э–∞—З–∞–ї—М–љ–∞—П —Б—Г–Љ–Љ–∞',p:id,init:1})}else{p.name=d.name;p.role=d.role}},
+ !n&&p.role!=='owner'?()=>{S.people=S.people.filter(x=>x!==p);delete S.invVals[p.id];if(who===p.id)who='all'}:null);
+}
+function goalForm(g){
+ const n=!g;
+ form(n?'–Э–Њ–≤–∞—П —Ж–µ–ї—М':'–¶–µ–ї—М',[{k:'e',l:'–Ч–љ–∞—З–Њ–Ї',v:g?g.e:'рЯОѓ'},{k:'name',l:'–Э–∞–Ј–≤–∞–љ–Є–µ',v:g?g.name:''},{k:'target',l:'–¶–µ–ї—М, '+S.cur,t:'number',v:g?g.target:''},{k:'cur',l:'–Э–∞–Ї–Њ–њ–ї–µ–љ–Њ —Б–µ–є—З–∞—Б',t:'number',v:g?g.cur:0}],
+ d=>{d.target=+d.target;d.cur=+d.cur;n?S.goals.push({id:uid(),...d}):Object.assign(g,d)},g?()=>{S.goals=S.goals.filter(x=>x!==g)}:null);
+}
+function settingsForm(){
+ form('–Э–∞—Б—В—А–Њ–є–Ї–Є',[{k:'user',l:'–Ш–Љ—П –њ–Њ–ї—М–Ј–Њ–≤–∞—В–µ–ї—П',v:S.user},{k:'name',l:'–Э–∞–Ј–≤–∞–љ–Є–µ –њ–Њ—А—В—Д–µ–ї—П',v:S.name},{k:'cur',l:'–Т–∞–ї—О—В–∞ –Њ—В–Њ–±—А–∞–ґ–µ–љ–Є—П',o:Object.keys(R).map(c=>[c,c+' '+SYM[c]]),v:S.cur},{k:'start',l:'–Ф–∞—В–∞ –љ–∞—З–∞–ї–∞ –Є–љ–≤–µ—Б—В–Є—А–Њ–≤–∞–љ–Є—П',t:'date',v:S.start},{k:'goal',l:'–¶–µ–ї—М –њ–Њ—А—В—Д–µ–ї—П',t:'number',v:S.goal},
+ {k:'accr',l:'–Х–ґ–µ–Љ–µ—Б—П—З–љ—Л–є –і–Њ—Е–Њ–і —Б –Є–љ–≤–µ—Б—В–Є—Ж–Є–є –љ–∞ –±–∞–љ–Ї',o:[['1','–Т–Ї–ї—О—З—С–љ'],['0','–Т—Л–Ї–ї—О—З–µ–љ']],v:S.accr?'1':'0'},{k:'rate',l:'–Я—А–Њ—Ж–µ–љ—В –≤ –Љ–µ—Б—П—Ж, %',t:'number',v:S.rate},
+ {k:'theme',l:'–Ґ–µ–Љ–∞',o:[['auto','–Р–≤—В–Њ'],['light','–°–≤–µ—В–ї–∞—П'],['dark','–Ґ—С–Љ–љ–∞—П']],v:S.theme},{k:'notif',l:'–£–≤–µ–і–Њ–Љ–ї–µ–љ–Є—П',o:[['1','–Т–Ї–ї—О—З–µ–љ—Л'],['0','–Т—Л–Ї–ї—О—З–µ–љ—Л']],v:S.notif?'1':'0'},
+ {k:'me',l:'–†–∞–±–Њ—В–∞—В—М –Ї–∞–Ї (–њ—А–Њ–≤–µ—А–Ї–∞ –њ—А–∞–≤)',o:S.people.map(p=>[p.id,p.name+' вАФ '+ROLE[p.role]]),v:S.me},{k:'pin',l:'PIN-–Ї–Њ–і (–њ—Г—Б—В–Њ вАФ –±–µ–Ј PIN)',v:S.pin,t:'password',opt:1}],
+ d=>{const old=S.cur;if(old!==d.cur)for(const k in S.invVals)S.invVals[k]=S.invVals[k]*R[old]/R[d.cur];
+  const wasOn=S.accr;Object.assign(S,d,{goal:+d.goal,notif:d.notif==='1',accr:d.accr==='1',rate:Math.max(0,+d.rate||0)});
+  if(S.accr&&!wasOn)S.lastAcc=ym(today());accrue()});
+}
+const V={
+home(){const s=stats(),pr=Math.min(100,Math.max(0,s.cap/S.goal*100));
+ const nt=[];if(S.notif){const l=S.ops.filter(vis).map(o=>o.date).sort().pop();if(l&&(Date.now()-new Date(l))/864e5>7)nt.push('рЯФФ –Т—Л –љ–µ –і–Њ–±–∞–≤–ї—П–ї–Є –Њ–њ–µ—А–∞—Ж–Є–Є —Г–ґ–µ –±–Њ–ї—М—И–µ 7 –і–љ–µ–є');
+ if(who==='all'){if(S.goal>s.cap)nt.push('рЯОѓ –Ф–Њ —Ж–µ–ї–Є –Њ—Б—В–∞–ї–Њ—Б—М '+money(S.goal-s.cap));else nt.push('рЯОЙ –¶–µ–ї—М –њ–Њ—А—В—Д–µ–ї—П –і–Њ—Б—В–Є–≥–љ—Г—В–∞')}
+ if(s.gain>0&&s.inv>0)nt.push('рЯУИ –Ш–љ–≤–µ—Б—В–Є—Ж–Є–Є –≤—Л—А–Њ—Б–ї–Є –љ–∞ '+(s.gain/s.inv*100).toFixed(1).replace('.',',')+'%')}
+ if(S.accr&&S.rate>0&&S.lastAcc&&monthly()>0)nt.push(`рЯТЄ ${S.rate}% —Б –Є–љ–≤–µ—Б—В–Є—Ж–Є–є –њ—А–Є—Е–Њ–і–Є—В –љ–∞ –±–∞–љ–Ї 1-–≥–Њ —З–Є—Б–ї–∞. –°–ї–µ–і—Г—О—Й–µ–µ –љ–∞—З–Є—Б–ї–µ–љ–Є–µ ${fd(nm(S.lastAcc)+'-01')}: ~${money(monthly())}`);
+ return nt.map(x=>`<div class="note">${x}</div>`).join('')+`<div class="card hero"><div class="mut">${who==='all'?esc(S.name)+' ¬Ј –Њ–±—Й–Є–є –Ї–∞–њ–Є—В–∞–ї':'рЯС§ '+esc(pname(who))+' ¬Ј –ї–Є—З–љ—Л–є –Ї–∞–њ–Є—В–∞–ї'}</div><div class="big">${money(s.cap)}</div>
+ <div class="grid" style="margin-top:16px"><div><div class="mut">рЯП¶ –Т –±–∞–љ–Ї–µ</div><b>${money(s.bank)}</b></div><div><div class="mut">рЯУИ –Т –Є–љ–≤–µ—Б—В–Є—Ж–Є—П—Е</div><b>${money(s.iv)}</b></div>
+ <div><div class="mut">рЯУК –Ф–Њ—Е–Њ–і / –Є–Ј–Љ–µ–љ–µ–љ–Є–µ</div><b class="${s.gain<0?'neg':'pos'}">${sg(s.gain)}</b></div><div><div class="mut">рЯУЕ –Э–∞—З–∞—В–Њ</div><b>${fd(S.start)}</b></div></div></div>
+ ${who==='all'?`<div class="card"><div class="row" style="border:0;padding:0"><span>рЯОѓ –¶–µ–ї—М ${money(S.goal)}</span><b>${pr.toFixed(1).replace('.',',')}%</b></div><div class="bar"><i style="width:${pr}%"></i></div></div>`:''}
+ <div class="card"><div class="chips">${[[7,'–Э–µ–і–µ–ї—П'],[30,'–Ь–µ—Б—П—Ж'],[182,'6 –Љ–µ—Б—П—Ж–µ–≤'],[365,'–У–Њ–і'],[0,'–Т—Б—С –≤—А–µ–Љ—П']].map(r=>`<button class="${range===r[0]?'on':''}" data-a="range" data-v="${r[0]}">${r[1]}</button>`).join('')}</div>${chart()}</div>`},
+bank(){const o=S.ops.filter(x=>x.t==='bank'&&vis(x)),s=(f)=>o.filter(f).reduce((a,x)=>a+base(x),0);
+ const ini=s(x=>x.init),acc=s(x=>x.auto),inn=s(x=>!x.init&&!x.auto&&x.type==='in'),out=s(x=>x.type==='out'),tot=ini+inn+acc+out;
+ const g={};o.forEach(x=>g[x.sub]=(g[x.sub]||0)+base(x));
+ return`<div class="card"><div class="mut">–С–∞–ї–∞–љ—Б –±–∞–љ–Ї–∞${who==='all'?'':' ¬Ј '+esc(pname(who))}</div><div class="big">${money(tot)}</div><p class="mut">–Э–∞—З–∞–ї—М–љ–∞—П —Б—Г–Љ–Љ–∞: ${money(ini)}<br>–Я–Њ–њ–Њ–ї–љ–µ–љ–Њ: +${money(inn)}<br>рЯТЄ –Ф–Њ—Е–Њ–і —Б –Є–љ–≤–µ—Б—В–Є—Ж–Є–є: +${money(acc)}<br>–°–љ—П—В–Њ: вИТ${money(Math.abs(out))}<br>–Ф–∞—В–∞ –љ–∞—З–∞–ї–∞: ${fd(S.start)}</p></div>
+ <div class="card"><h3>–Я–Њ –±–∞–љ–Ї–∞–Љ</h3>${Object.entries(g).map(([k,v])=>`<div class="row"><span>${esc(k)}</span><span><b>${money(v)}</b> ${owner()?`<button class="btn g sm" data-a="renbank" data-v="${esc(k)}">вЬПпЄП</button>`:''}</span></div>`).join('')||'<div class="empty">–Я–Њ–Ї–∞ –љ–µ—В –±–∞–љ–Ї–Њ–≤. –Ф–Њ–±–∞–≤—М—В–µ –њ–µ—А–≤–Њ–µ –њ–Њ–њ–Њ–ї–љ–µ–љ–Є–µ.</div>'}<div class="row"><b>–Т—Б–µ–≥–Њ –≤ –±–∞–љ–Ї–∞—Е</b><b>${money(tot)}</b></div></div>`},
+invest(){const s=stats(),ids=who==='all'?S.people.map(p=>p.id):[who];
+ const pc=id=>{const inv=pInv(id),val=pVal(id),g=val-inv,as={};S.ops.filter(o=>o.t==='inv'&&o.p===id).forEach(x=>as[x.sub]=(as[x.sub]||0)+base(x));
+  return`<div class="card"><div class="row" style="border:0;padding:0"><h3>рЯС§ ${esc(pname(id))}</h3>${canVal(id)?`<button class="btn g sm" data-a="invval" data-id="${id}">–Ю–±–љ–Њ–≤–Є—В—М —Б—В–Њ–Є–Љ–Њ—Б—В—М</button>`:''}</div>
+  <div class="mid">${money(val)}</div>
+  <p class="mut">рЯТµ –Т–ї–Њ–ґ–µ–љ–Њ: ${money(inv)} ¬Ј рЯУК –Ш–Ј–Љ–µ–љ–µ–љ–Є–µ: <b class="${g<0?'neg':'pos'}">${sg(g)}</b>${S.accr&&S.rate>0&&val>0?`<br>рЯТЄ –Э–∞ –±–∞–љ–Ї –Ї–∞–ґ–і—Л–є –Љ–µ—Б—П—Ж: ~${money(val*S.rate/100)} (${S.rate}%)`:''}</p>
+  ${Object.entries(as).map(([k,v])=>`<div class="row"><span>${esc(k)}</span><b>${money(v)}</b></div>`).join('')||'<div class="empty">–Э–µ—В –∞–Ї—В–Є–≤–Њ–≤. –Ф–Њ–±–∞–≤—М—В–µ –∞–Ї—Ж–Є–Є, ETF, –Њ–±–ї–Є–≥–∞—Ж–Є–Є –Є–ї–Є –і—А—Г–≥–Њ–µ.</div>'}</div>`};
+ return(who==='all'?`<div class="card"><div class="mut">–Т—Б–µ –Є–љ–≤–µ—Б—В–Є—Ж–Є–Є –≤–Љ–µ—Б—В–µ</div><div class="big">${money(s.iv)}</div><p class="mut">рЯТµ –Т–ї–Њ–ґ–µ–љ–Њ: ${money(s.inv)} ¬Ј рЯУК <b class="${s.gain<0?'neg':'pos'}">${sg(s.gain)}</b><br>–£ –Ї–∞–ґ–і–Њ–≥–Њ —З–µ–ї–Њ–≤–µ–Ї–∞ —Б–≤–Њ–є –Њ—В–і–µ–ї—М–љ—Л–є –њ–Њ—А—В—Д–µ–ї—М вАФ —Б–Љ–Њ—В—А–Є—В–µ –љ–Є–ґ–µ –Є–ї–Є –≤—Л–±–µ—А–Є—В–µ —З–µ–ї–Њ–≤–µ–Ї–∞ —Б–≤–µ—А—Е—Г.</p></div>`:'')+ids.map(pc).join('')},
+history(){const f={all:()=>1,bank:o=>o.t==='bank',inv:o=>o.t==='inv',in:o=>o.type==='in',out:o=>o.type==='out'}[hf];
+ const l=S.ops.filter(o=>vis(o)&&f(o)).sort((a,b)=>b.date.localeCompare(a.date));
+ return`<div class="chips">${[['all','–Т—Б–µ'],['bank','–С–∞–љ–Ї'],['inv','–Ш–љ–≤–µ—Б—В–Є—Ж–Є–Є'],['in','–Я–Њ–њ–Њ–ї–љ–µ–љ–Є—П'],['out','–°–љ—П—В–Є—П']].map(x=>`<button class="${hf===x[0]?'on':''}" data-a="hf" data-v="${x[0]}">${x[1]}</button>`).join('')}</div>
+ <div class="card">${l.map(o=>`<div class="row"><div><div>${fd(o.date)}</div><div class="mut">${o.init?'–Э–∞—З–∞–ї—М–љ–∞—П —Б—Г–Љ–Љ–∞':o.auto?'рЯТЄ '+esc(o.comment):esc(o.comment||(o.type==='in'?'–Я–Њ–њ–Њ–ї–љ–µ–љ–Є–µ':'–°–љ—П—В–Є–µ'))} ¬Ј ${o.t==='bank'?'рЯП¶':'рЯУИ'} ${esc(o.sub)} ¬Ј ${esc(pname(o.p))}</div></div>
+ <div style="text-align:right"><b class="${o.type==='out'?'neg':'pos'}">${o.type==='out'?'вИТ':'+'}${money(o.amount,o.cur||'KZT')}</b><br>${canEdit(o)?`<button class="btn g sm" data-a="edit" data-id="${o.id}">–Ш–Ј–Љ–µ–љ–Є—В—М</button>`:''}</div></div>`).join('')||'<div class="empty">–Ю–њ–µ—А–∞—Ж–Є–є –љ–µ—В. –Э–∞–ґ–Љ–Є—В–µ ¬Ђ+ –Ф–Њ–±–∞–≤–Є—В—М¬ї.</div>'}</div>`},
+people(){const tot=S.people.reduce((a,p)=>a+pCap(p.id),0),t1=tot||1;
+ return`<div class="card"><h3>${esc(S.name)}</h3><div class="mut">–£—З–∞—Б—В–љ–Є–Ї–Њ–≤: ${S.people.length}</div>
+ ${S.people.map(p=>`<div class="row"><div>рЯС§ <b>${esc(p.name)}</b><div class="mut">${ROLE[p.role]} ¬Ј –і–Њ–ї—П ${(pCap(p.id)/t1*100).toFixed(0)}% ¬Ј –Є–љ–≤–µ—Б—В–Є—Ж–Є–Є ${money(pVal(p.id))}</div></div><span><b>${money(pCap(p.id))}</b> ${owner()?`<button class="btn g sm" data-a="person" data-id="${p.id}">вЬПпЄП</button>`:''}</span></div>`).join('')}
+ <div class="row"><b>–Ю–±—Й–Є–є –Ї–∞–њ–Є—В–∞–ї</b><b>${money(tot)}</b></div>${owner()?'<button class="btn" data-a="person">+ –Ф–Њ–±–∞–≤–Є—В—М —З–µ–ї–Њ–≤–µ–Ї–∞</button>':''}</div>
+ <div class="card mut"><b>–Я—А–∞–≤–∞:</b><br>рЯСС –Т–ї–∞–і–µ–ї–µ—Ж вАФ –≤—Б—С: –ї—О–і–Є, —Б—Г–Љ–Љ—Л, –Є—Б—В–Њ—А–Є—П, –љ–∞—Б—В—А–Њ–є–Ї–Є.<br>рЯС§ –£—З–∞—Б—В–љ–Є–Ї вАФ –і–Њ–±–∞–≤–ї—П–µ—В –Є –Љ–µ–љ—П–µ—В —Б–≤–Њ–Є –і–µ–љ—М–≥–Є –Є —Б—В–Њ–Є–Љ–Њ—Б—В—М —Б–≤–Њ–Є—Е –Є–љ–≤–µ—Б—В–Є—Ж–Є–є, —Б–Љ–Њ—В—А–Є—В –≤—Б—С.<br>рЯСА –Э–∞–±–ї—О–і–∞—В–µ–ї—М вАФ —В–Њ–ї—М–Ї–Њ –њ—А–Њ—Б–Љ–Њ—В—А.</div>`},
+goals(){return S.goals.map(g=>{const p=Math.min(100,g.cur/g.target*100);return`<div class="card"><div class="row" style="border:0;padding:0"><h3>${esc(g.e)} ${esc(g.name)}</h3><button class="btn g sm" data-a="goal" data-id="${g.id}">вЬПпЄП</button></div>
+ <div class="mut">–°–µ–є—З–∞—Б ${money(g.cur)} –Є–Ј ${money(g.target)}</div><div class="bar"><i style="width:${p}%"></i></div><div class="row" style="border:0;padding:0"><b>${p.toFixed(0)}%</b><span class="mut">–Ю—Б—В–∞–ї–Њ—Б—М ${money(Math.max(0,g.target-g.cur))}</span></div></div>`}).join('')+'<button class="btn" data-a="goal">+ –Э–Њ–≤–∞—П —Ж–µ–ї—М</button>'},
+stats(){const s=stats(),ini=sum(o=>o.init),inn=sum(o=>!o.init&&!o.auto&&o.type==='in'),acc=sum(o=>o.auto),out=sum(o=>o.type==='out'),mo={};
+ S.ops.filter(vis).forEach(o=>{const k=o.date.slice(0,7);mo[k]=mo[k]||[0,0];o.type==='in'?mo[k][0]+=base(o):mo[k][1]+=-base(o)});
+ const ks=Object.keys(mo).sort().slice(-12),mx=Math.max(1,...ks.map(k=>Math.max(...mo[k]))),tot=S.people.reduce((a,p)=>a+pCap(p.id),0)||1;
+ const sh=(n,v,t)=>`<div class="row"><span style="min-width:90px">${esc(n)}</span><div class="bar" style="flex:1"><i style="width:${Math.max(0,v/t*100)}%"></i></div><b>${(v/t*100).toFixed(0)}%</b></div>`;
+ return`<div class="card"><h3>–Ч–∞ –≤—Б—С –≤—А–µ–Љ—П${who==='all'?'':' ¬Ј '+esc(pname(who))}</h3><div class="row"><span>–Э–∞—З–∞–ї—М–љ–∞—П —Б—Г–Љ–Љ–∞</span><b>${money(ini)}</b></div><div class="row"><span>–Т—Б–µ–≥–Њ –≤–љ–µ—Б–µ–љ–Њ</span><b>${money(inn)}</b></div><div class="row"><span>рЯТЄ –Ф–Њ—Е–Њ–і —Б –Є–љ–≤–µ—Б—В–Є—Ж–Є–є –љ–∞ –±–∞–љ–Ї</span><b>${money(acc)}</b></div><div class="row"><span>–Т—Б–µ–≥–Њ —Б–љ—П—В–Њ</span><b>${money(Math.abs(out))}</b></div><div class="row"><span>–Ґ–µ–Ї—Г—Й–Є–є –Ї–∞–њ–Є—В–∞–ї</span><b>${money(s.cap)}</b></div></div>
+ <div class="card"><h3>–Я–Њ–њ–Њ–ї–љ–µ–љ–Є—П –Є —Б–љ—П—В–Є—П –њ–Њ –Љ–µ—Б—П—Ж–∞–Љ</h3><div class="bars">${ks.map(k=>`<div><span style="display:flex;gap:2px;align-items:flex-end;height:90px"><i style="flex:1;height:${mo[k][0]/mx*100}%"></i><i class="o" style="flex:1;height:${mo[k][1]/mx*100}%"></i></span>${k.slice(5)}.${k.slice(2,4)}</div>`).join('')||'<div class="empty">–Э–µ—В –і–∞–љ–љ—Л—Е</div>'}</div><p class="mut">–Ч–µ–ї—С–љ—Л–є вАФ –њ–Њ–њ–Њ–ї–љ–µ–љ–Є—П, –Ї—А–∞—Б–љ—Л–є вАФ —Б–љ—П—В–Є—П.</p></div>
+ <div class="card"><h3>–С–∞–љ–Ї –Є –Є–љ–≤–µ—Б—В–Є—Ж–Є–Є</h3>${sh('рЯП¶ –С–∞–љ–Ї',s.bank,s.cap||1)}${sh('рЯУИ –Ш–љ–≤–µ—Б—В–Є—Ж–Є–Є',s.iv,s.cap||1)}</div>
+ <div class="card"><h3>–Ф–Њ–ї—П —Г—З–∞—Б—В–љ–Є–Ї–Њ–≤</h3>${S.people.map(p=>sh(p.name,pCap(p.id),tot)).join('')}</div>`},
+settings(){return`<div class="card"><div class="row"><span>–Я–Њ–ї—М–Ј–Њ–≤–∞—В–µ–ї—М</span><b>${esc(S.user)} ¬Ј ${ROLE[me().role]}</b></div><div class="row"><span>–Т–∞–ї—О—В–∞</span><b>${S.cur}</b></div><div class="row"><span>–Ф–Њ—Е–Њ–і —Б –Є–љ–≤–µ—Б—В–Є—Ж–Є–є –љ–∞ –±–∞–љ–Ї</span><b>${S.accr?S.rate+'% –≤ –Љ–µ—Б—П—Ж':'–Т—Л–Ї–ї'}</b></div><div class="row"><span>–Ґ–µ–Љ–∞</span><b>${{auto:'–Р–≤—В–Њ',light:'–°–≤–µ—В–ї–∞—П',dark:'–Ґ—С–Љ–љ–∞—П'}[S.theme]}</b></div><div class="row"><span>–£–≤–µ–і–Њ–Љ–ї–µ–љ–Є—П</span><b>${S.notif?'–Т–Ї–ї':'–Т—Л–Ї–ї'}</b></div><div class="row"><span>PIN</span><b>${S.pin?'–Т–Ї–ї—О—З—С–љ':'–Э–µ—В'}</b></div>
+ <div class="acts" style="flex-wrap:wrap"><button class="btn" data-a="settings">–Ш–Ј–Љ–µ–љ–Є—В—М –љ–∞—Б—В—А–Њ–є–Ї–Є</button><button class="btn g" data-a="backup">–≠–Ї—Б–њ–Њ—А—В / –Ї–Њ–њ–Є—П</button></div></div>
+ <div class="card"><div class="mut">–°—Г–Љ–Љ—Л —Е—А–∞–љ—П—В—Б—П –≤ –Є—Б—Е–Њ–і–љ–Њ–є –≤–∞–ї—О—В–µ –Њ–њ–µ—А–∞—Ж–Є–Є, –њ–µ—А–µ—Б—З—С—В –Є–і—С—В –њ–Њ –њ—А–Є–±–ї–Є–Ј–Є—В–µ–ї—М–љ—Л–Љ –Ї—Г—А—Б–∞–Љ: USD ${R.USD}, EUR ${R.EUR}, RUB ${R.RUB}, JPY ${R.JPY} вВЄ. –Ф–Њ—Е–Њ–і —Б –Є–љ–≤–µ—Б—В–Є—Ж–Є–є –љ–∞—З–Є—Б–ї—П–µ—В—Б—П 1-–≥–Њ —З–Є—Б–ї–∞ –Ї–∞–ґ–і–Њ–≥–Њ –Љ–µ—Б—П—Ж–∞, –Ї–Њ–≥–і–∞ –њ—А–Є–ї–Њ–ґ–µ–љ–Є–µ –Њ—В–Ї—А—Л—В–Њ (–њ—А–Њ–њ—Г—Й–µ–љ–љ—Л–µ –Љ–µ—Б—П—Ж—Л –і–Њ—Б—З–Є—В—Л–≤–∞—О—В—Б—П). –Ф–∞–љ–љ—Л–µ –ї–µ–ґ–∞—В –≤ —Н—В–Њ–Љ –±—А–∞—Г–Ј–µ—А–µ.</div><div class="acts"><button class="btn g" data-a="reset">–Ф–µ–Љ–Њ-–і–∞–љ–љ—Л–µ</button><button class="btn d" data-a="delacc">–£–і–∞–ї–Є—В—М –і–∞–љ–љ—Л–µ</button></div></div>`}
+};
+function chart(){
+ const ops=S.ops.filter(vis).sort((a,b)=>a.date.localeCompare(b.date)),s=stats();
+ let c=0,pts=ops.map(o=>[+new Date(o.date),c+=base(o)]);
+ pts.push([Date.now(),s.cap]);
+ const now=Date.now(),from=range?now-range*864e5:(pts[0]?pts[0][0]:now-864e5*30);
+ let pre=0;pts.forEach(p=>{if(p[0]<from)pre=p[1]});
+ let q=[[from,pre],...pts.filter(p=>p[0]>=from)];
+ if(q.length<2)q=[[from,pre],[now,s.cap]];
+ const x0=q[0][0],x1=q[q.length-1][0]||x0+1,ys=q.map(p=>p[1]),lo=Math.min(...ys),hi=Math.max(...ys),sp=(hi-lo)||1;
+ const X=t=>20+(t-x0)/((x1-x0)||1)*560,Y=v=>150-(v-lo)/sp*120;
+ const d=q.map((p,i)=>(i?'L':'M')+X(p[0]).toFixed(1)+' '+Y(p[1]).toFixed(1)).join('');
+ return`<svg viewBox="0 0 600 180" role="img" aria-label="–У—А–∞—Д–Є–Ї –Ї–∞–њ–Є—В–∞–ї–∞"><path d="${d}L${X(x1)} 165L20 165Z" fill="var(--acs)"/><path d="${d}" fill="none" stroke="var(--ac)" stroke-width="3" stroke-linejoin="round"/><text x="20" y="14" fill="var(--mut)" font-size="12">${money(hi)}</text><text x="20" y="178" fill="var(--mut)" font-size="12">${money(lo)}</text></svg>`}
+const TABS=[['home','рЯП† –У–ї–∞–≤–љ–∞—П'],['bank','рЯП¶ –С–∞–љ–Ї'],['invest','рЯУИ –Ш–љ–≤–µ—Б—В–Є—Ж–Є–Є'],['history','рЯУЬ –Ш—Б—В–Њ—А–Є—П'],['people','рЯС• –Ы—О–і–Є'],['goals','рЯОѓ –¶–µ–ї–Є'],['stats','рЯУК –Р–љ–∞–ї–Є—В–Є–Ї–∞'],['settings','вЪЩпЄП –Э–∞—Б—В—А–Њ–є–Ї–Є']];
+function render(){
+ document.documentElement.dataset.theme=S.theme==='auto'?'':S.theme;
+ const app=document.getElementById('app');
+ if(locked){app.innerHTML=`<div class="card" style="margin-top:20vh;text-align:center"><h2>InvestTrack</h2><p class="mut">–Т–≤–µ–і–Є—В–µ PIN-–Ї–Њ–і</p><input id="pin" type="password" inputmode="numeric" style="text-align:center"><div class="acts"><button class="btn" id="go" style="flex:1">–Ю—В–Ї—А—Л—В—М</button></div></div>`;
+  document.getElementById('fab').innerHTML='';
+  document.getElementById('go').onclick=()=>{if(document.getElementById('pin').value===S.pin){locked=false;render()}else alert('–Э–µ–≤–µ—А–љ—Л–є PIN')};return}
+ const wb=S.people.length>1&&['home','bank','invest','history','stats'].includes(tab)?`<div class="chips who">${[['all','рЯС• –Т—Б–µ –≤–Љ–µ—Б—В–µ'],...S.people.map(p=>[p.id,'рЯС§ '+p.name])].map(x=>`<button class="${who===x[0]?'on':''}" data-a="who" data-v="${esc(x[0])}">${esc(x[1])}</button>`).join('')}</div>`:'';
+ app.innerHTML=`<div class="top"><div><b>InvestTrack</b><br><span>${esc(S.user)}</span></div></div><nav>${TABS.map(t=>`<button class="${tab===t[0]?'on':''}" data-a="tab" data-v="${t[0]}">${t[1]}</button>`).join('')}</nav>${wb}${V[tab]()}`;
+ document.getElementById('fab').innerHTML=canAdd()&&['home','bank','invest','history'].includes(tab)?`<button class="btn" data-a="add" data-type="in" data-t="${tab==='invest'?'inv':'bank'}">+ –Ф–Њ–±–∞–≤–Є—В—М</button><button class="btn g" style="background:var(--card);border:1px solid var(--line)" data-a="add" data-type="out" data-t="${tab==='invest'?'inv':'bank'}">вИТ –°–љ—П—В—М</button>`:'';
+}
+document.addEventListener('click',e=>{const el=e.target.closest('[data-a]');if(el&&A[el.dataset.a])A[el.dataset.a](el.dataset)});
+document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')A.close()});
+migrate();accrue();render();
+</script></body></html>
